@@ -38,9 +38,13 @@ class ModbusReader:
                 # Extract and return the data value
                 register_values = result.registers
                 voltage =convert_to_voltage(register_values)
+
                 timestamp=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')[:23]
+
                 print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')[:23])
+
                 insertToDatabase(timestamp,voltage,self.ip)
+                
                 self.logger.info(f"{timestamp}    {register_address}          {voltage} { self.ip} ")
 
         except Exception as e:
